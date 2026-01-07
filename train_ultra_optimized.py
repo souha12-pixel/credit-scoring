@@ -358,7 +358,7 @@ def main():
         calibrated_stack.fit(X_train_trans, y_train)
         print("✓ Stacking calibré")
     except Exception as e:
-        print(f"⚠️  Calibration Stacking échouée: {e}")
+        print(f"  Calibration Stacking échouée: {e}")
         calibrated_stack = stacking
 
     # =========================
