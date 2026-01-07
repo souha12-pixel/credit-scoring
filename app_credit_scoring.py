@@ -16,7 +16,6 @@ from datetime import datetime
 # Configuration de la page
 st.set_page_config(
     page_title="Credit Scoring - Prédiction de Défaut",
-    page_icon="💳",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -68,10 +67,10 @@ def load_model():
 model, model_loaded = load_model()
 
 if not model_loaded:
-    st.error("⚠️ Aucun modèle trouvé. Veuillez entraîner un modèle d'abord.")
+    st.error(" Aucun modèle trouvé. Veuillez entraîner un modèle d'abord.")
     st.stop()
 
-st.success("✅ Modèle chargé avec succès !")
+st.success(" Modèle chargé avec succès !")
 
 # Fonction pour créer les features
 def create_advanced_features(data):
@@ -142,10 +141,10 @@ def create_advanced_features(data):
     return df
 
 # Sidebar pour la saisie
-st.sidebar.header("📋 Informations du Demandeur")
+st.sidebar.header(" Informations du Demandeur")
 
 # Informations personnelles
-st.sidebar.subheader("👤 Informations Personnelles")
+st.sidebar.subheader(" Informations Personnelles")
 age = st.sidebar.slider("Âge", 18, 80, 35)
 income = st.sidebar.number_input("Revenu Annuel ($)", 10000, 500000, 50000, step=5000)
 months_employed = st.sidebar.slider("Mois d'Emploi", 0, 480, 60)
@@ -158,7 +157,7 @@ marital_status = st.sidebar.selectbox("Statut Marital",
     ["Single", "Married", "Divorced"])
 
 # Informations financières
-st.sidebar.subheader("💰 Informations Financières")
+st.sidebar.subheader(" Informations Financières")
 credit_score = st.sidebar.slider("Score de Crédit", 300, 850, 650)
 num_credit_lines = st.sidebar.slider("Nombre de Lignes de Crédit", 0, 20, 3)
 dti_ratio = st.sidebar.slider("Ratio DTI (Debt-to-Income)", 0.0, 1.0, 0.3, 0.01)
@@ -176,13 +175,13 @@ loan_purpose = st.sidebar.selectbox("Objectif du Prêt",
     ["Home", "Auto", "Education", "Business", "Other"])
 
 # Bouton de prédiction
-predict_button = st.sidebar.button("🔮 Prédire le Risque", type="primary", use_container_width=True)
+predict_button = st.sidebar.button(" Prédire le Risque", type="primary", use_container_width=True)
 
 # Zone principale
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.header("📊 Résultats de l'Analyse")
+    st.header(" Résultats de l'Analyse")
     
     if predict_button:
         # Créer le DataFrame
@@ -215,15 +214,15 @@ with col1:
             
             # Affichage du résultat principal
             if risk_proba < 20:
-                risk_level = "FAIBLE ✅"
+                risk_level = "FAIBLE "
                 color = "green"
                 message = "Excellent profil ! Risque de défaut très faible."
             elif risk_proba < 40:
-                risk_level = "MODÉRÉ ⚠️"
+                risk_level = "MODÉRÉ "
                 color = "orange"
                 message = "Profil acceptable avec quelques points d'attention."
             else:
-                risk_level = "ÉLEVÉ ⛔"
+                risk_level = "ÉLEVÉ "
                 color = "red"
                 message = "Profil à risque élevé. Examen approfondi nécessaire."
             
@@ -280,50 +279,50 @@ with col1:
             
             # Facteurs de risque
             st.markdown("---")
-            st.subheader("⚠️ Facteurs de Risque Identifiés")
+            st.subheader(" Facteurs de Risque Identifiés")
             
             risk_factors = []
             if dti_ratio > 0.43:
-                risk_factors.append("🔴 Ratio DTI élevé (> 43%)")
+                risk_factors.append(" Ratio DTI élevé (> 43%)")
             if credit_score < 620:
-                risk_factors.append("🔴 Score de crédit faible (< 620)")
+                risk_factors.append(" Score de crédit faible (< 620)")
             if interest_rate > 15:
-                risk_factors.append("🟡 Taux d'intérêt élevé")
+                risk_factors.append(" Taux d'intérêt élevé")
             if months_employed < 12:
-                risk_factors.append("🟡 Durée d'emploi courte (< 1 an)")
+                risk_factors.append(" Durée d'emploi courte (< 1 an)")
             if age < 25:
-                risk_factors.append("🟡 Jeune emprunteur")
+                risk_factors.append(" Jeune emprunteur")
             if loan_amount > 50000 and income < 75000:
-                risk_factors.append("🟡 Prêt important par rapport au revenu")
+                risk_factors.append(" Prêt important par rapport au revenu")
             
             if risk_factors:
                 for factor in risk_factors:
                     st.markdown(f"- {factor}")
             else:
-                st.success("✅ Aucun facteur de risque majeur identifié")
+                st.success(" Aucun facteur de risque majeur identifié")
             
             # Recommandations
             st.markdown("---")
-            st.subheader("💡 Recommandations")
+            st.subheader(" Recommandations")
             
             if risk_proba > 40:
                 st.markdown("""
-                - 🔍 **Examen approfondi requis** : Vérification des documents
-                - 💰 **Garanties supplémentaires** : Envisager un co-signataire ou une garantie
-                - 📉 **Réduction du montant** : Proposer un prêt de montant inférieur
-                - ⏰ **Délai de décision** : Prendre le temps d'analyser en détail
+                -  **Examen approfondi requis** : Vérification des documents
+                -  **Garanties supplémentaires** : Envisager un co-signataire ou une garantie
+                -  **Réduction du montant** : Proposer un prêt de montant inférieur
+                -  **Délai de décision** : Prendre le temps d'analyser en détail
                 """)
             elif risk_proba > 20:
                 st.markdown("""
-                - ✅ **Approbation possible** avec conditions
-                - 📄 **Documentation complète** requise
-                - 🔍 **Suivi régulier** recommandé
+                -  **Approbation possible** avec conditions
+                -  **Documentation complète** requise
+                -  **Suivi régulier** recommandé
                 """)
             else:
                 st.markdown("""
-                - ✅ **Profil excellent** : Approbation recommandée
-                - 🎯 **Conditions favorables** peuvent être offertes
-                - 📈 **Client à fidéliser**
+                -  **Profil excellent** : Approbation recommandée
+                -  **Conditions favorables** peuvent être offertes
+                -  **Client à fidéliser**
                 """)
                 
         except Exception as e:
@@ -334,17 +333,17 @@ with col2:
     st.header("📋 Résumé du Profil")
     
     if predict_button:
-        st.markdown("### 👤 Personnel")
+        st.markdown("###  Personnel")
         st.markdown(f"**Âge:** {age} ans")
         st.markdown(f"**Emploi:** {months_employed} mois")
         st.markdown(f"**Type:** {employment_type}")
         
-        st.markdown("### 💰 Financier")
+        st.markdown("###  Financier")
         st.markdown(f"**Revenu:** ${income:,}")
         st.markdown(f"**Crédit:** {credit_score}")
         st.markdown(f"**DTI:** {dti_ratio:.1%}")
         
-        st.markdown("### 🏦 Prêt")
+        st.markdown("###  Prêt")
         st.markdown(f"**Montant:** ${loan_amount:,}")
         st.markdown(f"**Taux:** {interest_rate}%")
         st.markdown(f"**Durée:** {loan_term} mois")
@@ -354,7 +353,7 @@ with col2:
 st.markdown("---")
 st.markdown("""
     <div style='text-align: center; color: gray; padding: 1rem;'>
-        💳 Credit Scoring System | Développé avec Streamlit | 
-        ⚠️ À des fins éducatives uniquement
+         Credit Scoring System | Développé avec Streamlit | 
+         À des fins éducatives uniquement
     </div>
 """, unsafe_allow_html=True)
